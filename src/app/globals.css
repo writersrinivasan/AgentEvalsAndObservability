@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #070815;
+  --panel: rgba(255, 255, 255, 0.045);
+  --panel-strong: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
+  --text: #eef0ff;
+  --muted: #a3a8c9;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-panel-strong: var(--panel-strong);
+  --color-line: var(--border);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-jakarta);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  background-image:
+    radial-gradient(900px 500px at 8% -10%, rgba(168, 85, 247, 0.28), transparent 60%),
+    radial-gradient(800px 500px at 100% 0%, rgba(14, 165, 233, 0.22), transparent 60%),
+    radial-gradient(900px 600px at 50% 110%, rgba(236, 72, 153, 0.16), transparent 60%);
+  background-attachment: fixed;
+}
+
+@utility card {
+  @apply rounded-2xl border border-line bg-panel backdrop-blur-sm;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 text-white shadow-lg shadow-fuchsia-500/20 hover:brightness-110;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-panel text-ink hover:bg-panel-strong;
+}
+@utility chip {
+  @apply inline-flex items-center gap-1 rounded-full border border-line bg-panel px-2.5 py-0.5 text-xs font-medium text-muted;
+}
+@utility gradient-text {
+  @apply bg-gradient-to-r from-fuchsia-400 via-amber-300 to-sky-400 bg-clip-text text-transparent;
+}
+@utility label {
+  @apply text-[11px] font-semibold uppercase tracking-[0.14em] text-muted;
+}
+
+@keyframes pulse-ring {
+  0% { stroke-opacity: 0.9; stroke-width: 3; }
+  100% { stroke-opacity: 0; stroke-width: 14; }
+}
+.node-active-ring {
+  animation: pulse-ring 1.4s ease-out infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -20; }
+}
+.edge-active {
+  stroke-dasharray: 6 4;
+  animation: dash 0.8s linear infinite;
+}
+
+pre, code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 8px; }
